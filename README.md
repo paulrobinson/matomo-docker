@@ -19,7 +19,7 @@ These steps are specific to my Matomo host. You should follow whatever steps are
 These steps will prepare this Matomo environment to restore the backup.
 
 1. Copy your Matamo backup .sql file to the ./scripts dircectory of this project. 
-2. Add `USE 'matomo';` to the very top of the .sql file you just added to the ./scripts directory
+2. Add ``USE `matomo`;`` to the very top of the .sql file you just added to the ./scripts directory
 
 ### Check the Docker Environemnt
 It is important that the Matomo and MYSQL versions in both the backed up environment and this Docker environment match. To Check this:
