@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  db:
+    image: mysql:8.0.32
+    command: --max-allowed-packet=64MB
+    restart: always
+    volumes:
+      - db:/var/lib/mysql:Z
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=TRUE
+      - MYSQL_DISABLE_UPGRADE_BACKUP=1
+      - MYSQL_AUTO_UPGRADE=1
+      - MYSQL_INITDB_SKIP_TZINFO=1
+      - MYSQL_DATABASE=matomo
+      - MYSQL_USER=matomo
+      - MYSQL_PASSWORD=abc
+
+
+  app:
+    image: matomo:4.15.0
+    restart: always
+    volumes:
+      - matomo:/var/www/html:z
+    environment:
+      - MATOMO_DATABASE_HOST=db
+      - MATOMO_DATABASE_ADAPTER=mysql
+      - MATOMO_DATABASE_TABLES_PREFIX=matomo_
+      - MATOMO_DATABASE_USERNAME=matomo
+      - MATOMO_DATABASE_PASSWORD=
+      - MATOMO_DATABASE_DBNAME=matomo
+    ports:
+      - 8080:80
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 9090:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=
+      - UPLOAD_LIMIT=20M
+
+volumes:
+  db:
+  matomo:
