@@ -7,16 +7,16 @@ services:
     restart: always
     volumes:
       - db:/var/lib/mysql:Z
-      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./scripts:/docker-entrypoint-initdb.d/
     environment:
       - MYSQL_ROOT_PASSWORD=
-      - MYSQL_ALLOW_EMPTY_PASSWORD=TRUE
+      - MYSQL_ALLOW_EMPTY_PASSWORD=YES
       - MYSQL_DISABLE_UPGRADE_BACKUP=1
       - MYSQL_AUTO_UPGRADE=1
       - MYSQL_INITDB_SKIP_TZINFO=1
       - MYSQL_DATABASE=matomo
       - MYSQL_USER=matomo
-      - MYSQL_PASSWORD=abc
+      - MYSQL_PASSWORD=temp
 
 
   app:
