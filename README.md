@@ -13,7 +13,6 @@ These steps are specific to my Matomo host. You should follow whatever steps are
 5. Click on the "Download Backups" tab and wait for the backup file to appear in the list in the 'MySQL 8' row.
 6. Click on the "Download file mysql8.tar.gz" link
 7. Extract "mysql8.tar.gz"
-8. If 2x .sql files are extracted, you will need to use the larger one (it should be several MB in size) to restore from.
 
 ### Prepare the Matomo backup
 These steps will prepare this Matomo environment to restore the backup.
